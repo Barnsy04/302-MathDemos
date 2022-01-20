@@ -5,6 +5,8 @@
 // Don't use rotate()
 // Use vectors and trigonometry
 
+
+
 void setup(){
   size(400, 400);
 }
@@ -14,10 +16,42 @@ void draw(){
   
   ///////////////// START YOUR CODE HERE:
   
+  noStroke();
+  fill(255);
   
+  PVector red = FindOvalPos(0, 0);
+  PVector green = FindOvalPos(60, 0);
+  PVector blue = FindOvalPos(-60, 0);
+  
+  ellipse(red.x, red.y, 20, 20);
+  ellipse(green.x, green.y, 20, 20);
+  ellipse(blue.x, blue.y, 20, 20);
+  
+  PVector FindOvalPos(float rotateAmount, float timeOffset){
+    float time = millis()/1000.0;
+  
+  // find path on oval
+  float x = 150 * cos(time);
+  float y = 50 *sin(time);
+  
+  // convert coordinate to polar
+  float angle = atan2(y, x);
+  float mag = sqrt(x*x + y*y);
+  
+  angle -= radians(rotateAmount);
+  
+  // convert back to cartesian
+  x = mag * cos(angle);
+  y = mag * sin(angle);
+
+  // translate to center of screen
+  x += width/2;
+  y += height/2;
+  
+  return new PVector(x, y);
+  }
   
   ///////////////// END YOUR CODE HERE
-  
 }
 void drawBackground(){
   background(0);
