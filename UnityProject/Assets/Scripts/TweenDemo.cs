@@ -5,6 +5,7 @@ using UnityEditor;
 
 public class TweenDemo : MonoBehaviour
 {
+    public AnimationCurve curve;
 
     public Transform pointA;
     public Transform pointB;
@@ -44,9 +45,13 @@ public class TweenDemo : MonoBehaviour
 
         float p = timeCurrent / timeTotal;
 
+        p = curve.Evaluate(p); //Wow!
+
         Vector3 pos = AnimMath.Lerp(pointA.position, pointB.position, p, false);
 
         transform.position = pos;
+
+        if (timeCurrent >= timeTotal) isPlaying = false;
     }
 }
 
