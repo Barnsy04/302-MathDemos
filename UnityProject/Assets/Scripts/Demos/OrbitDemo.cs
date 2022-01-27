@@ -10,7 +10,9 @@ public class OrbitDemo : MonoBehaviour
 
     public float radius = 10;
     public int pathResolution = 32;
-    public int orbitSpeed = 2;
+    public int timeMultiplier = 2;
+    public int timeOffset = 0;
+
 
     private LineRenderer path;
 
@@ -29,8 +31,8 @@ public class OrbitDemo : MonoBehaviour
     {
         if (!orbitCenter) return;
 
-        float x = radius * Mathf.Cos(Time.time * orbitSpeed);
-        float z = radius * Mathf.Sin(Time.time * orbitSpeed);
+        float x = radius * Mathf.Cos(Time.time * timeMultiplier + timeOffset);
+        float z = radius * Mathf.Sin(Time.time * timeMultiplier + timeOffset);
 
         transform.position = new Vector3(x, 0, z) + orbitCenter.position;
 
